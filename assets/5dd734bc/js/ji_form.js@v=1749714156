@@ -1,0 +1,1346 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+function jiPrintForm() {
+    window.print ();
+}
+
+function xyz123() {
+
+    var chk = false;
+    var arr = document.getElementById ('jiuserpersonal-choicebcom');
+    var x = arr.checked;
+    if (x) {
+        chk = true;
+    }
+
+
+    var chk1 = false;
+    var arr1 = document.getElementById ('jiuserpersonal-choiceba');
+    var x = arr1.checked;
+    if (x) {
+        chk1 = true;
+    }
+
+
+    if (chk === false && chk1 === false) {
+        alert ('Select your NCWEB Preference');
+        document.getElementById ("ncweb_option").className = "ncwebOptionCheck";
+        event.preventDefault ();
+        return;
+    }
+
+}
+
+$ (document).ready (function () {
+    $ ("#onloadmodal").modal ('show');
+    /*
+     * Function to copy the correspondence address to the permanent address.
+     *   */
+
+// personal
+
+    $ ('#jiuserpersonal-nationality').on ('change', function (e) {
+        var nat = $ ('#jiuserpersonal-nationality').val ();
+        if (nat == 0 && nat != '') {
+            $ ('#o_nationality').show ();
+            $ ('#o_nationality1').show ();
+        } else {
+            $ ('#o_nationality').hide ();
+            $ ('#o_nationality1').hide ();
+            $ ('#jiuserpersonal-othernationality').val ('');
+        }
+
+    });
+    $ ('#jiuserpersonal-nationality').trigger ('change');
+
+
+    $ ('#jiuserpersonal-religion').on ('change', function (e) {
+        var rel = $ ('#jiuserpersonal-religion').val ();
+        if (rel == 'Other') {
+            $ ('#o_religion').show ();
+        } else {
+            $ ('#o_religion').hide ();
+            $ ('#jiuserpersonal-otherreligion').val ('');
+        }
+
+    });
+    $ ('#jiuserpersonal-religion').trigger ('change');
+
+
+    $ ('#jiuserpersonal-category').on ('change', function (e) {
+        var cat = $ ('#jiuserpersonal-category').val ();
+        if (cat == 2 || cat == 6 || cat == 15 || cat == 16 || cat == 17 || cat == 23 || cat == 24|| cat == 30|| cat == 32|| cat == 33) { // OBC
+            $ ('#jui-obc-selected').show();
+            $ ('#category_certificate').show();
+            $ ('#valid_certificate').show ();
+            $ ('#crtnumber').show();
+            $ ('#jiuserpersonal-ews_annual_family_income').val('');
+            $ ('#jiuserpersonal-sub_category').val('');
+            $ ('#ews_income').hide();
+            $ ('#sub_category').hide ();
+        } else if (cat == 5 || cat == 25) { // EWS
+            $ ('#jui-obc-selected').hide();
+            $ ('#jiuserpersonal-obcStateName').val('');
+            $ ('#jiuserpersonal-community').val('');
+            $ ('#jiuserpersonal-obcFamilyIncome').val('');
+            $ ('#category_certificate').show();
+            $ ('#valid_certificate').show ();
+            $ ('#crtnumber').show();
+            $ ('#jiuserpersonal-category_certificate_no').val('');
+            $ ('#jiuserpersonal-category_certificate_issuing_date').val('');
+            $ ('#ews_income').show();
+            $ ('#sub_category').hide ();
+            $ ('#jiuserpersonal-sub_category').val('');
+        } else if (cat == 3 || cat == 4 || cat == 18|| cat == 22|| cat == 26|| cat == 27|| cat == 28|| cat == 29|| cat == 31 || cat == 32 || cat == 33) { // SC, ST, SCA
+            $ ('#jui-obc-selected').hide();
+            $ ('#jiuserpersonal-obcStateName').val('');
+            $ ('#jiuserpersonal-community').val('');
+            $ ('#jiuserpersonal-obcFamilyIncome').val('');
+            $ ('#category_certificate').show();
+            $ ('#valid_certificate').hide();
+            $ ('#jiuserpersonal-valid_certificate_no').val('');
+            $ ('#crtnumber').show();
+            $ ('#ews_income').hide();
+            $ ('#jiuserpersonal-ews_annual_family_income').val('');
+            $ ('#sub_category').hide ();
+            $ ('#jiuserpersonal-sub_category').val('');
+            $ ('#message').hide();
+            $ ('#jiuserpersonal-category_certificate_no').prop('readonly',false);
+            $ ('#jiuserpersonal-category_certificate_issuing_date').prop('readonly',false);
+        } else {
+            $ ('#jui-obc-selected').hide();
+            $ ('#jiuserpersonal-obcStateName').val('');
+            $ ('#jiuserpersonal-community').val('');
+            $ ('#jiuserpersonal-obcFamilyIncome').val('');
+            $ ('#category_certificate').hide();
+            $ ('#valid_certificate').hide();
+            $ ('#jiuserpersonal-valid_certificate_no').val('');
+            $ ('#crtnumber').hide();
+            $ ('#jiuserpersonal-category_certificate_no').val('');
+            $ ('#jiuserpersonal-category_certificate_issuing_date').val('');
+            $ ('#ews_income').hide();
+            // $ ('#jiuserpersonal-ews_annual_family_income').val('');
+            $ ('#sub_category').hide ();
+            $ ('#jiuserpersonal-sub_category').val('');
+            $ ('#message').hide();
+        }
+    });
+    $ ('#jiuserpersonal-category').trigger ('change');
+
+    $('#jiuserpersonal-valid_certificate_no').on('change',function (){
+        var valid_certificate = $ ('#jiuserpersonal-valid_certificate_no').val();
+        if(valid_certificate === 'No'){
+            $ ('#message').show();
+            $ ('#jiuserpersonal-category_certificate_no').val('');
+            $ ('#jiuserpersonal-category_certificate_no').prop('readonly',true);
+            $ ('#jiuserpersonal-category_certificate_issuing_date').val('');
+            $ ('#jiuserpersonal-category_certificate_issuing_date').prop('readonly',true);
+        }else{
+            $ ('#message').hide();
+            $ ('#jiuserpersonal-category_certificate_no').prop('readonly',false);
+            $ ('#jiuserpersonal-category_certificate_issuing_date').prop('readonly',false);
+        }
+    });
+    $('#jiuserpersonal-valid_certificate_no').trigger('change');
+
+    $ ('#o_board').hide ();
+    $ ('#o_sub1').hide ();
+    $ ('#o_sub2').hide ();
+    $ ('#o_sub3').hide ();
+    $ ('#o_sub4').hide ();
+    $ ('#o_sub5').hide ();
+    $ ('#o_sub6').hide ();
+    $ ('#jui-wq-selected').hide ();
+    $ ('#ncweb').hide ();
+    $ ('#ncweb_option').hide ();
+    //show other Subjects
+    if ($ ('#jiuseracademic-othersub1name').val () != '') {
+        $ ('#o_sub1').show ();
+    } else {
+        $ ('#o_sub1').hide ();
+    }
+
+    if ($ ('#jiuseracademic-othersub2name').val () != '') {
+        $ ('#o_sub2').show ();
+    } else {
+        $ ('#o_sub2').hide ();
+    }
+
+    if ($ ('#jiuseracademic-othersub3name').val () != '') {
+        $ ('#o_sub3').show ();
+    } else {
+        $ ('#o_sub3').hide ();
+    }
+
+    if ($ ('#jiuseracademic-othersub4name').val () != '') {
+        $ ('#o_sub4').show ();
+    } else {
+        $ ('#o_sub4').hide ();
+    }
+
+    if ($ ('#jiuseracademic-othersub5name').val () != '') {
+        $ ('#o_sub5').show ();
+    } else {
+        $ ('#o_sub5').hide ();
+    }
+
+    if ($ ('#jiuseracademic-othersub6name').val () != '') {
+        $ ('#o_sub6').show ();
+    } else {
+        $ ('#o_sub6').hide ();
+    }
+
+
+//Check for Date Month
+
+    $ ('#jiuserpersonal-dobday').change (function () {
+
+        var date = $ ('#jiuserpersonal-dobday').val ();
+        var month = $ ('#jiuserpersonal-dobmonth').val ();
+        if ((date == 30 || date == 31) && month == 2) {
+            alert ('Check your Date');
+            $ ('#jiuserpersonal-dobday').val ('');
+        }
+    });
+    $ ('#jiuserpersonal-dobmonth').change (function () {
+        var date = $ ('#jiuserpersonal-dobday').val ();
+        var month = $ ('#jiuserpersonal-dobmonth').val ();
+        if ((date == 30 || date == 31) && month == 2) {
+            alert ('Check your Month');
+            $ ('#jiuserpersonal-dobmonth').val ('');
+        }
+    });
+//Check for other Options Show/Hide
+
+
+    $ ('#warddep').hide ();
+    $ ('#wardcol').hide ();
+
+    $ ('#jiuserpersonal-wardquota').change (function () {
+        var ward = $ ('#jiuserpersonal-wardquota').val ();
+        if (ward == 1) {
+            $ ('#jui-wq-selector').addClass ('bg-success');
+            $ ('#jui-wq-selected').addClass ('bg-success');
+            $ ('#jui-wq-selected').show ();
+        } else {
+            $ ('#jiuserpersonal-nameofemp').val ('');
+            $ ('#jiuserpersonal-designation').val ('');
+            $ ('#jiuserpersonal-wardcollege').select2 ("val", "");
+            $ ('#jiuserpersonal-wardstaff').val ('');
+            $ ('#jiuserpersonal-wardquotatype').val ('');
+            $ ('#jiuserpersonal-wardquotarelation').val ('');
+            $ ('#jiuserpersonal-wardemployeedesignation').val ('');
+            $ ('#jiuserpersonal-warddepartment').select2 ("val", "");
+            $ ('#jui-wq-selector').removeClass ('bg-success');
+            $ ('#jui-wq-selected').removeClass ('bg-success');
+            $ ('#jui-wq-selected').hide ();
+        }
+    });
+    $ ('#jiuserpersonal-wardquotatype').change (function () {
+        var ward = $ ('#jiuserpersonal-wardquotatype').val ();
+        if (ward == 1) {
+            $ ('#warddep').show ();
+            $ ('#jiuserpersonal-wardcollege').val ('').trigger ('change');
+            $ ('#wardcol').hide ();
+        } else if (ward == 2) {
+            $ ('#warddep').hide ();
+            $ ('#jiuserpersonal-warddepartment').val ('').trigger ('change');
+            $ ('#wardcol').show ();
+        } else {
+            $ ('#warddep').hide ();
+            $ ('#wardcol').hide ();
+        }
+    });
+    $ ('#jiuserpersonal-wardquotatype').trigger ('change');
+    //check Ward Quota to show Other Details
+    if ($ ('#jiuserpersonal-wardquota').val () == 1) {
+        $ ('#jui-wq-selector').addClass ('bg-success');
+        $ ('#jui-wq-selected').addClass ('bg-success');
+        $ ('#jui-wq-selected').show ();
+    } else {
+        $ ('#jiuserpersonal-nameofemp').val ('');
+        $ ('#jiuserpersonal-designation').val ('');
+        $ ('#jiuserpersonal-nameofcollege').val ('');
+        $ ('#jui-wq-selector').removeClass ('bg-success');
+        $ ('#jui-wq-selected').removeClass ('bg-success');
+        $ ('#jui-wq-selected').hide ();
+    }
+
+
+//    $('#jiuserpersonal-gender').change(function () {
+//        var gender = $('#jiuserpersonal-gender').val();
+//        if (gender == 2) {
+//            $('#ncweb').show();$('#confirm').show();
+//        } else {
+//            $('#jiuserpersonal-choicencweb').val(0);
+//            $('#ncweb').hide();
+//        }
+//    });
+//    //Check Gender To Show Hide NcWeb
+//
+//    if ($('#jiuserpersonal-gender').val() == 2) {
+//        $('#ncweb').show();
+//        
+//    } else {
+//        $('#jiuserpersonal-choicencweb').val(0);
+//        $('#ncweb').hide();
+//    }
+
+    $ ('input[name="JIUserPersonal[gender]"]').change (function () {
+        if ($ (this).is (':checked')) {
+            var content = '<p>Applicants are advised to enter gender correctly and carefully as the choices available in types of courses/colleges varies.</p>' +
+                '<p>If a <strong>FEMALE</strong> applicant selects <strong>MALE</strong> gender she will not be able to avail benefit of&nbsp;' +
+                '<strong>Women Colleges and Courses</strong> in<strong>&nbsp;University of Delhi</strong>.</p>';
+            $ ("#myModalContent").html (content);
+            $ ('#myModal').modal ('show');
+
+        }
+    });
+
+
+    $ ('#jiuserpersonal-choicencweb').change (function () {
+        var ncweb = $ ('#jiuserpersonal-choicencweb').val ();
+        if (ncweb == 1) {
+            $ ('#ncweb_option').show ();
+        } else {
+
+            $ ('#ncweb_option').hide ();
+        }
+    });
+    //Check NCWEB Choice to show NCWEB Option
+    if ($ ('#jiuserpersonal-choicencweb').val () == 1) {
+        $ ('#ncweb_option').show ();
+    } else {
+        $ ('#ncweb_option').hide ();
+    }
+
+    // academic
+
+
+    //Merit Course Slection
+    $ ('#jiusercourseselection-ismerit').on ('change merit', function () {
+        var selection = +$ (this).val ()
+        if (selection == 5) {
+            $ ('#jiuser-course-choice-message').hide ();
+            $ ('#jiuser-course-choice-form').hide ();
+        }
+        if (selection == 1) {
+            $ ('#jiuser-course-choice-message').show ();
+            $ ('#jiuser-course-choice-form').show ();
+
+        } else {
+            $ ('#jiuser-course-choice-message').hide ();
+            $ ('#jiuser-course-choice-form').hide ();
+        }
+    });
+    $ ('#jiusercourseselection-ismerit').trigger ('merit');
+
+
+    //Entrance Course Slection
+    $ ('#entranceform-isentrance').on ('change entrance', function () {
+        var selection = +$ (this).val ()
+        if (selection == 5) {
+            $ ('#jiuser-entrance-course-choice-form').hide ();
+        }
+        if (selection == 1) {
+            $ ('#jiuser-entrance-course-choice-form').show ();
+
+        } else {
+            $ ('#jiuser-entrance-course-choice-form').hide ();
+        }
+    });
+    $ ('#entranceform-isentrance').trigger ('entrance');
+
+
+    $ ('input[name="entrance[]"]').on ('change', function () {
+        var course = [];
+        $ ("input:checkbox[name='entrance[]']:checked").each (function () {
+            course.push ($ (this).val ());
+        });
+
+        if ($.inArray ("365", course) > -1) {
+            $ ('#beled_col_pref').show ();
+        } else {
+            $ ('#beled_col_pref').hide ();
+        }
+
+        if ($.inArray ("9999", course) > -1) {
+            $ ('#bms_col_pref').show ();
+        } else {
+            $ ('#bms_col_pref').hide ();
+        }
+
+
+        if ($.inArray ("259", course) > -1) {
+            $ ('#hindustani').show ();
+        } else {
+            $ ('#hindustani').hide ();
+        }
+        if ($.inArray ("260", course) > -1) {
+            $ ('#karnatak').show ();
+        } else {
+            $ ('#karnatak').hide ();
+        }
+        if ($.inArray ("261", course) > -1) {
+            $ ('#percussion').show ();
+        } else {
+            $ ('#percussion').hide ();
+        }
+
+    });
+    $ ('input[name="entrance[]"]').trigger ('change');
+
+    $ ('input[name="BAHHindustani[type][]"]').on ('change', function () {
+        $ ('#hindustani_instrument').hide ();
+        var instrument = [];
+        $ ("input:checkbox[name='BAHHindustani[type][]']:checked").each (function () {
+            instrument.push ($ (this).val ());
+        });
+
+        if ($.inArray ("Instrument", instrument) > -1) {
+            $ ('#hindustani_instrument').show ();
+        } else {
+            $ ('#hindustani_instrument').hide ();
+        }
+
+    });
+    $ ('input[name="BAHHindustani[type][]"]').trigger ('change');
+
+    $ ('input[name="BAHKarnatak[type][]"]').on ('change', function () {
+        $ ('#karnatak_instrument').hide ();
+        var instrument = [];
+        $ ("input:checkbox[name='BAHKarnatak[type][]']:checked").each (function () {
+            instrument.push ($ (this).val ());
+        });
+
+        if ($.inArray ("Instrument", instrument) > -1) {
+            $ ('#karnatak_instrument').show ();
+        } else {
+            $ ('#karnatak_instrument').hide ();
+        }
+
+    });
+    $ ('input[name="BAHKarnatak[type][]"]').trigger ('change');
+
+    $ (".beled_chk").change (function () {
+        var selVal = [];
+        $ (".beled_chk").each (function () {
+            selVal.push (this.value);
+        });
+
+        $ (this).siblings (".beled_chk").find ("option").removeAttr ("disabled").filter (function () {
+            var a = $ (this).parent ("select").val ();
+            return (($.inArray (this.value, selVal) > -1) && (this.value != a))
+        }).attr ("disabled", "disabled");
+    });
+    $ (".beled_chk").trigger ('change');
+
+    $ ("#resetbeled").click (function () {
+        $ (".beled_chk").each (function () {
+            this.value = '';
+            $ ('#' + this.id).find ("option").removeAttr ("disabled");
+        });
+    });
+    $ ("#resetbeled").trigger ('change');
+
+
+    $ (".bms_chk").change (function () {
+        var selVal = [];
+
+        $ (".bms_chk").each (function () {
+            selVal.push (this.value);
+
+        });
+        $ (this).siblings (".bms_chk").find ("option").removeAttr ("disabled").filter (function () {
+            var a = $ (this).parent ("select").val ();
+            return (($.inArray (this.value, selVal) > -1) && (this.value != a))
+        }).attr ("disabled", "disabled");
+
+    });
+    $ (".bms_chk").trigger ('change');
+
+
+    $ ("#resetbms").click (function () {
+        $ (".bms_chk").each (function () {
+            this.value = '';
+            $ ('#' + this.id).find ("option").removeAttr ("disabled");
+        });
+    });
+    $ ("#resetbms").trigger ('change');
+
+
+    $ ('#ji-sports-section').hide ();
+    $ ('#jisportsecaoption-sports').on ('change jisports', function () {
+        var selection = $ (this).val ();
+        if (selection == 5) {
+            $ ('#jiusersports-sportid').val ('');
+            $ ('#jiusersports-sportid-div').hide ();
+            $ ('#ji-sports-section').hide ();
+            $ ('#ji-sports-section').hide ();
+            $ ('#display-sports').show ();
+        }
+        if (selection == 1) {
+            $ ('#ji-sports-section').show ();
+            $ ('#display-sports').show ();
+            $ ('#jiusersports-sportid-div').show ();
+        } else {
+            $ ('#ji-sports-section').hide ();
+            $ ('#display-sports').hide ();
+            $ ('#jiusersports-sportid-div').hide ();
+        }
+    });
+    $ ('#jisportsecaoption-sports').trigger ('jisports');
+// sports college selection generate checkbox
+    $ ('#jiusersports-sportid').on ('change', function () {
+        console.log ($ (this).val ());
+        if ($ (this).val () == 0) {
+            $ ('#ji-sports-college-section').hide ();
+        } else {
+            $ ('#ji-sports-college-section').show ();
+        }
+
+        var sports_section_display_college_list = $ ('#sports-section-display-college-list');
+        sports_section_display_college_list.empty ();
+        var colnames = jigetsportscollegelist ($ ('#jiusersports-sportid').val ());
+
+    });
+    $ ('#jiusersports-sportid').trigger ('change');
+
+//fetch colleges list
+    function jigetsportscollegelist(sportsId) {
+        var sports_section_display_college_list = $ ('#sports-section-display-college-list');
+        sports_section_display_college_list.empty ();
+        var gender = $ ('#jiusersports-sportid').data ('gender');
+        var y;
+        $.ajax ({
+            url: $ ('#jiusersports-sportid').data ('url'),
+            type: 'post',
+            data: {sportsId: sportsId, gender: gender},
+            dataType: 'html',
+            success: function (data) {
+                y = JSON.parse (data);
+                if (y.response === 1) {
+                    var sports_section_display_college_list = $ ('#sports-section-display-college-list');
+                    $ (y.value).appendTo (sports_section_display_college_list);
+                    //addsportsCheckbox(y.value);
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            error: function () {
+                alert ('Please reload the page you inputs are invalid.');
+                return false;
+            }
+        });
+        return y;
+    }
+
+    function addsportsCheckbox(colnames) {
+        //   var container = $('#jiusersports-collegeid');
+        var sports_section_display_college_list = $ ('#sports-section-display-college-list');
+        sports_section_display_college_list.empty ();
+        // container.empty();
+        var collegeList = $ ('<ul/>').appendTo (sports_section_display_college_list);
+
+        // $('<li>', {value: obj.name}).append(collegeList);
+
+        for (var i = 0; i < colnames.length; i++) {
+            var obj = colnames[i];
+            $ ('<li/>', {html: obj.name}).appendTo (collegeList);
+        }
+        return 1;
+    }
+
+
+//certificate
+    $ ('#sports-year-1-div').hide ();
+    $ ('#jiusersports-year1').on ('change', function () {
+        var selection = $ (this).val ();
+        if (selection == 1) {
+            $ ('#sports-year-1-div').show ();
+        } else {
+            $ ('#jiusersports-startdate1').val ('');
+            $ ('#jiusersports-enddate1').val ('')
+            $ ('#jiusersports-certificateno1').val ('');
+            $ ('#sports-year-1-div').hide ();
+        }
+    });
+
+    $ ('#sports-year-2-div').hide ();
+    $ ('#jiusersports-year2').on ('change', function () {
+        var selection = $ (this).val ();
+        if (selection == 1) {
+            $ ('#sports-year-2-div').show ();
+        } else {
+            $ ('#jiusersports-startdate2').val ('');
+            $ ('#jiusersports-enddate2').val ('')
+            $ ('#jiusersports-certificateno2').val ('');
+            $ ('#sports-year-2-div').hide ();
+        }
+    });
+
+    $ ('#sports-year-3-div').hide ();
+    $ ('#jiusersports-year3').on ('change', function () {
+        var selection = $ (this).val ();
+        if (selection == 1) {
+            $ ('#sports-year-3-div').show ();
+        } else {
+            $ ('#jiusersports-startdate3').val ('');
+            $ ('#jiusersports-enddate3').val ('')
+            $ ('#jiusersports-certificateno3').val ('');
+            $ ('#sports-year-3-div').hide ();
+        }
+    });
+    $ ('#jiusersports-year1').trigger ('change');
+    $ ('#jiusersports-year2').trigger ('change');
+    $ ('#jiusersports-year3').trigger ('change');
+
+// removing error when college is selected
+    $ ('#jiusersports-collegeid').on ('click', function () {
+        var x = $ ('input[type=checkbox][name="JIUserSports[collegeId][]"]:checked');
+        if (x.length == 0) {
+            $ ('#jiusersports-collegeid').parent ('div').addClass ('has-error');
+        } else {
+            $ ('#jiusersports-collegeid').parent ('div').removeClass ('has-error').children ('.help-block').html ('');
+        }
+    });
+
+//Eca
+
+
+    $ ("#jisportsecaoption-eca").on ('change jieca', function () {
+        var selection = +$ (this).val ();
+        if (selection == 5) {
+            $ ('#jiusersports-ecaid').val ('');
+            $ ('#ji-eca-section').hide ();
+            $ ('#display-eca').show ();
+        }
+        if (selection == 1) {
+            $ ('#ji-eca-section').show ();
+            $ ('#display-eca').show ();
+        }
+        /*  else {
+              $('#ji-eca-section').hide();
+              $('#display-eca').hide();
+              if (ecadatafilled) {
+                  $x = confirm("All " + ecadatafilled + " ECA data filled will be deleted if you press Ok please select Cancel if you want to apply in ECA. ");
+                  if ($x) {
+                      $('#display-eca').html('');
+                      var ecaid = $('#jisportsecaoption-eca').data('ecaid');
+                      var link_url = $('#jisportsecaoption-eca').data('url');
+                      $.ajax({
+                          url: link_url,
+                          type: 'post',
+                          data: {ecaid: ecaid},
+                          dataType: 'html',
+                          success: function (data) {
+                              y = JSON.parse(data);
+                              if (y.response === 1) {
+                                  location.reload(false);
+                                  return true;
+                              } else {
+                                  return false;
+                              }
+                          },
+                          error: function () {
+                              alert('Please reload the page you inputs are invalid.');
+                              return false;
+                          }
+                      });
+                  } else {
+                      location.reload(false);
+                  }
+              }
+          } */
+    });
+    $ ("#jisportsecaoption-eca").trigger ('jieca');
+//college list generation
+// sports college selection generate checkbox
+    $ ('#jiusereca-ecaid').on ('change', function () {
+        if ($ (this).val () == 0) {
+            $ ('#ji-eca-college-section').hide ();
+        } else {
+            $ ('#ji-eca-college-section').show ();
+        }
+        $ ('#jiusereca-collegeid').empty ();
+        var colnames = jigetecacollegelist ($ ('#jiusereca-ecaid').val ());
+    });
+    $ ('#jiusereca-ecaid').trigger ('change');
+
+    //fetch colleges list
+    function jigetecacollegelist(ecaid) {
+        var y;
+        var gender = $ ('#jisportsecaoption-eca').data ('gender');
+        $.ajax ({
+            url: $ ('#jiusereca-ecaid').data ('url'),
+            type: 'post',
+            data: {ecaid: ecaid, gender: gender},
+            dataType: 'html',
+            success: function (data) {
+                y = JSON.parse (data);
+                if (y.response === 1) {
+                    addecaCheckbox (y.value)
+                    return true;
+                } else {
+                    return false;
+                }
+            },
+            error: function () {
+                alert ('Please reload the page you inputs are invalid.');
+                return false;
+            }
+        });
+        return y;
+    }
+
+
+    function addecaCheckbox(colnames) {
+        var container = $ ('#jiuserecadata-collegeid');
+        container.empty ();
+        for (var i = 0; i < colnames.length; i++) {
+            var obj = colnames[i];
+            var x = $ ('<label class="jui-label" />').appendTo (container);
+            var y = $ ('<input />', {type: 'checkbox', name: 'JIUserEcaData[collegeId][]', value: obj.id}).appendTo (x);
+            x.append (obj.name);
+        }
+        return 1;
+    }
+
+//SM
+
+    $ ('#jui-eca-confirm').on ('click', function (e) {
+        var selection = $ ("input[type=radio][name='JISportsEcaOption[eca]']:checked").val ();
+        var check = $ ('#jiuserecadata-ecaid').val ();
+        if (selection && check) {
+            var resp = confirm ("You have unsaved changes in this section if you click ok those changes will be lost");
+            if (!resp) {
+                e.preventDefault ();
+            }
+        }
+    });
+    $ ('#jui-sports-confirm').on ('click', function (e) {
+        var selection = $ ("input[type=radio][name='JISportsEcaOption[sports]']:checked").val ();
+        var check = $ ('#jiusersports-sportid').val ();
+        if (selection && check) {
+            var resp = confirm ("You have unsaved changes in this section if you click ok those changes will be lost");
+            if (!resp) {
+                e.preventDefault ();
+            }
+        }
+    });
+
+    $ ('.sports-delete-btn').on ('click', function (e) {
+        var resp = confirm ("Are you sure you want to delete this entry?");
+        if (!resp) {
+            e.preventDefault ();
+        }
+    });
+    $ ('#home').click (function (e) {
+        e.preventDefault ();
+        var a = confirm ('This page contains some unsaved data. Still Want to logout?');
+        if (a) {
+            window.location = $ ('#logout').attr ('href');
+        } else {
+            return false;
+        }
+
+    });
+    $ ('#faq').click (function (e) {
+        e.preventDefault ();
+        var a = confirm ('This page contains some unsaved data. Still Want to logout?');
+        if (a) {
+            window.location = $ ('#logout').attr ('href');
+        } else {
+            return false;
+        }
+
+    });
+    $ ('#howto').click (function (e) {
+        e.preventDefault ();
+        var a = confirm ('This page contains some unsaved data. Still Want to logout?');
+        if (a) {
+            window.location = $ ('#logout').attr ('href');
+        } else {
+            return false;
+        }
+
+    });
+
+    $ ('#help').click (function (e) {
+        e.preventDefault ();
+        var a = confirm ('This page contains some unsaved data. Still Want to logout?');
+        if (a) {
+            window.location = $ ('#logout').attr ('href');
+        } else {
+            return false;
+        }
+
+    });
+    $ ('#logout').on ('click', function (e) {
+        e.preventDefault ();
+        var a = confirm ('This page contains some unsaved data. Still Want to logout?');
+        if (a) {
+            window.location = $ ('#logout').attr ('href');
+        } else {
+            return false;
+        }
+    });
+
+    (function () {
+
+        var countupload = $ ('.ji-check-upload').children ('div').length;
+        if (countupload == 0) {
+            $ ('#ji-upload-submit-btn').removeClass ('btn-danger').addClass ('btn-success');
+        } else {
+            $ ('#ji-upload-submit-btn').addClass ('btn-danger');
+        }
+    }) ();
+
+
+    $ ('#ji-upload-submit-btn').on ('click', function (e) {
+        if ($ (this).hasClass ('btn-danger')) {
+            alert ('Please Upload all files to proceed');
+            e.preventDefault ();
+        }
+
+    })
+
+    // course college list   
+    $ ('#jistudentcollegeselection-course').on ('change', function () {
+
+        var y;
+        var gender = $ (this).data ('gender');
+        var url = $ (this).data ('url');
+        var course = +$ (this).val ();
+        $ ('#college-selection-list').hide ();
+        $.ajax ({
+            url: url,
+            type: 'post',
+            data: {course: course, gender: gender},
+            dataType: 'html',
+            success: function (data) {
+                y = JSON.parse (data);
+                if (y.response === 1) {
+                    colnames = y.value;
+                    var container = $ ('#jistudentcollegeselection-college');
+                    container.empty ();
+                    for (var i = 0; i < colnames.length; i++) {
+                        var obj = colnames[i];
+                        var x = $ ('<label class="jui-label" />').appendTo (container);
+                        var y = $ ('<input />', {
+                            type: 'checkbox',
+                            name: 'JIStudentCollegeSelection[college][]',
+                            value: obj.id
+                        }).appendTo (x);
+                        x.append (obj.name);
+                    }
+                    $ ('#college-selection-list').show ();
+                    return true;
+                } else {
+                    $ ('#jistudentcollegeselection-college').empty ();
+                    return false;
+                }
+            },
+            error: function () {
+                alert ('Please reload the page your inputs are invalid.');
+                return false;
+            }
+        });
+        return true;
+
+    });
+    // course list based on college as input
+    $ ('#jinccourseselectionform-college').on ('change', function () {
+
+        var y;
+        var gender = $ (this).data ('gender');
+        var url = $ (this).data ('url');
+        var college = +$ (this).val ();
+        $ ('#college-selection-list').hide ();
+        $.ajax ({
+            url: url,
+            type: 'post',
+            data: {college: college, gender: gender},
+            dataType: 'html',
+            success: function (data) {
+                y = JSON.parse (data);
+                if (y.response === 1) {
+                    colnames = y.value;
+                    var container = $ ('#jinccourseselectionform-course');
+                    container.empty ();
+                    for (var i = 0; i < colnames.length; i++) {
+                        var obj = colnames[i];
+                        var x = $ ('<label class="jui-label" />').appendTo (container);
+                        var y = $ ('<input />', {
+                            type: 'checkbox',
+                            name: 'JINCCourseSelectionForm[course][]',
+                            value: obj.id
+                        }).appendTo (x);
+                        x.append (obj.name);
+                    }
+                    $ ('#college-selection-list').show ();
+                    return true;
+                } else {
+                    $ ('#jistudentcollegeselection-course').empty ();
+                    return false;
+                }
+            },
+            error: function () {
+                alert ('Please reload the page your inputs are invalid.');
+                return false;
+            }
+        });
+        return true;
+
+    });
+
+
+//Start of Copy of Address
+    $ ('#add_checkbox').click (function () {
+        var status = $ ('#add_checkbox:checked').val ();
+        if (status == 'on') {
+            $ ("#jiuseraddress-percountry").select2 ("val", "");
+            $ ('#jiuseraddress-perstate').select2 ("val", "");
+            $ ('#jiuseraddress-peraddline1').val ($ ('#jiuseraddress-addline1').val ());
+            $ ('#jiuseraddress-peraddline2').val ($ ('#jiuseraddress-addline2').val ());
+            $ ("#jiuseraddress-percountry").val ($ ("#jiuseraddress-country").val ()).trigger ("change.select2");
+            $ ("#jiuseraddress-perpin").val ($ ("#jiuseraddress-pincode").val ()).trigger ("change");
+            $ ("#jiuseraddress-otherpercountry").val ($ ("#jiuseraddress-othercountry").val ()).trigger ("change");
+            $ ("#jiuseraddress-otherperstate").val ($ ("#jiuseraddress-otherstate").val ()).trigger ("change");
+            $ ("#jiuseraddress-otherpercity").val ($ ("#jiuseraddress-othercity").val ()).trigger ("change");
+            $ ("#jiuseraddress-otherperdistrict").val ($ ("#jiuseraddress-otherdistrict").val ()).trigger ("change");
+            var stateoptions = $ ("#jiuseraddress-state > option").clone ();
+            $ ('#jiuseraddress-perstate').append (stateoptions);
+            $ ("#jiuseraddress-perstate").val ($ ("#jiuseraddress-state").val ()).trigger ("change").prop ('disabled', false);
+            var cityoptions = $ ("#jiuseraddress-city > option").clone ();
+            $ ('#jiuseraddress-percity').append (cityoptions);
+            $ ("#jiuseraddress-percity").val ($ ("#jiuseraddress-city").val ()).trigger ("change").prop ('disabled', false);
+            var districtoptions = $ ("#jiuseraddress-district > option").clone ();
+            $ ('#jiuseraddress-perdistrict').append (districtoptions);
+            $ ("#jiuseraddress-perdistrict").val ($ ("#jiuseraddress-district").val ()).trigger ("change").prop ('disabled', false);
+
+
+        } else {
+            $ ('#jiuseraddress-peraddline1').val ('');
+            $ ('#jiuseraddress-peraddline2').val ('');
+            $ ("#jiuseraddress-percountry").select2 ("val", "");
+            $ ('#jiuseraddress-perstate').empty ();//select2("val", "");
+            $ ('#jiuseraddress-percity').empty ();//select2("val", "");
+            $ ('#jiuseraddress-perdistrcit').empty ();//select2("val", "");
+            $ ('#jiuseraddress-perpin').val ('');
+            $ ('#jiuseraddress-otherpercountry').val ('');
+            $ ('#jiuseraddress-otherperstate').val ('');
+            $ ('#jiuseraddress-otherpercity').val ('');
+            $ ('#jiuseraddress-otherperdistrict').val ('');
+        }
+    });
+//End of Copy Address
+// Start of the Correspondence Address Selection
+    $ ('#o_country').hide ();
+    $ ('#o_city').hide ();
+    $ ('#o_state').hide ();
+    $ ('#o_district').hide ();
+    $ ('#jiuseraddress-country').change (function () {
+        var c_value = $ ('#jiuseraddress-country').val ();
+        if (c_value == 2000) {
+            $ ('#o_country').show ();
+            $ ('#o_city').show ();
+            $ ('#o_state').show ();
+            $ ('#o_district').show ();
+        } else {
+            $ ('#o_country').hide ();
+            $ ('#o_city').hide ();
+            $ ('#o_state').hide ();
+            $ ('#o_district').hide ();
+            // $('#jiuseraddress-othercountry').val('');
+            // $('#jiuseraddress-otherstate').val('');
+            // $('#jiuseraddress-othercity').val('');
+            if (c_value == 101) {
+                var pincode = $ ('#jiuseraddress-pincode').val ();
+                if (!isNaN (pincode)) {
+                    document.getElementById ("ppincode").innerHTML = "";
+                } else {
+                    document.getElementById ("ppincode").innerHTML = "You have selected country as India, so enter the correct pincode.";
+                }
+            } else {
+                document.getElementById ("ppincode").innerHTML = "";
+            }
+        }
+    });
+    $ ('#jiuseraddress-country').trigger ('change');
+    $ ('#jiuseraddress-state').change (function () {
+        var c_value = $ ('#jiuseraddress-state').val ();
+        if (c_value == 40000) {
+            $ ('#o_state').show ();
+        } else {
+            // $('#jiuseraddress-otherstate').val('');
+            var sc_value = $ ('#jiuseraddress-country').val ();
+            if (sc_value == 2000) {
+                $ ('#o_country').show ();
+            } else {
+                $ ('#o_country').hide ();
+            }
+            // $('#jiuseraddress-city').val('');
+            var scity_value = $ ('#jiuseraddress-city').val ();
+            if (scity_value == 800000) {
+                $ ('#o_city').show ();
+            } else {
+                $ ('#o_city').hide ();
+            }
+        }
+    });
+    $ ('#jiuseraddress-state').trigger ('change');
+    $ ('#jiuseraddress-city').change (function () {
+        var c_value = $ ('#jiuseraddress-city').val ();
+        if (c_value == 800000) {
+            $ ('#o_city').show ();
+        } else {
+            // $('#jiuseraddress-othercity').val('');
+            $ ('#o_city').hide ();
+            var cc_value = $ ('#jiuseraddress-country').val ();
+            if (cc_value == 2000) {
+                $ ('#o_country').show ();
+            } else {
+                $ ('#o_country').hide ();
+            }
+            var cs_value = $ ('#jiuseraddress-state').val ();
+            if (cs_value == 40000) {
+                $ ('#o_state').show ();
+            } else {
+                $ ('#o_state').hide ();
+            }
+        }
+    });
+    $ ('#jiuseraddress-city').trigger ('change');
+    $ ('#jiuseraddress-district').change (function () {
+        var c_value = $ ('#jiuseraddress-district').val ();
+        if (c_value == 600000) {
+            $ ('#o_district').show ();
+        } else {
+            // $('#jiuseraddress-othercity').val('');
+            $ ('#o_city').hide ();
+            var cc_value = $ ('#jiuseraddress-country').val ();
+            if (cc_value == 2000) {
+                $ ('#o_country').show ();
+            } else {
+                $ ('#o_country').hide ();
+            }
+            var cs_value = $ ('#jiuseraddress-state').val ();
+            if (cs_value == 40000) {
+                $ ('#o_state').show ();
+            } else {
+                $ ('#o_state').hide ();
+            }
+        }
+    });
+    $ ('#jiuseraddress-district').trigger ('change');
+    $ ('#jiuseraddress-pincode').change (function () {
+        var c_value = $ ('#jiuseraddress-country').val ();
+        if (c_value == 101) {
+            var pincode = $ ('#jiuseraddress-pincode').val ();
+            if (!isNaN (pincode)) {
+                document.getElementById ("ppincode").innerHTML = "";
+            } else {
+                document.getElementById ("ppincode").innerHTML = "You have selected country as India, so enter the correct pincode.";
+            }
+        }
+    });
+// End of the Correspondence Address Selection
+// Start of the Permanent Address Selection
+    $ ('#op_country').hide ();
+    $ ('#op_city').hide ();
+    $ ('#op_state').hide ();
+    $ ('#op_district').hide ();
+    $ ('#jiuseraddress-percountry').change (function () {
+        var c_value = $ ('#jiuseraddress-percountry').val ();
+        if (c_value == 2000) {
+            $ ('#op_country').show ();
+            $ ('#op_city').show ();
+            $ ('#op_state').show ();
+            $ ('#op_district').show ();
+        } else {
+            $ ('#op_country').hide ();
+            $ ('#op_city').hide ();
+            $ ('#op_state').hide ();
+            $ ('#op_district').hide ();
+            // $('#jiuseraddress-otherpercountry').val('');
+            // $('#jiuseraddress-otherperstate').val('');
+            // $('#jiuseraddress-otherpercity').val('');
+            if (c_value == 101) {
+                var pincode = $ ('#jiuseraddress-perpin').val ();
+                if (!isNaN (pincode)) {
+                    document.getElementById ("oppincode").innerHTML = "";
+                } else {
+                    document.getElementById ("oppincode").innerHTML = "You have selected country as India, so enter the correct pincode.";
+                }
+            } else {
+                document.getElementById ("oppincode").innerHTML = "";
+            }
+        }
+    });
+    $ ('#jiuseraddress-percountry').trigger ('change');
+    $ ('#jiuseraddress-perstate').change (function () {
+        var c_value = $ ('#jiuseraddress-perstate').val ();
+        if (c_value == 40000) {
+            $ ('#op_state').show ();
+        } else {
+            // $('#jiuseraddress-otherperstate').val('');
+            var sc_value = $ ('#jiuseraddress-percountry').val ();
+            if (sc_value == 2000) {
+                $ ('#op_country').show ();
+            } else {
+                $ ('#op_country').hide ();
+            }
+            // $('#jiuseraddress-percity').val('');
+            var scity_value = $ ('#jiuseraddress-percity').val ();
+            if (scity_value == 800000) {
+                $ ('#op_city').show ();
+            } else {
+                $ ('#op_city').hide ();
+            }
+        }
+    });
+    $ ('#jiuseraddress-perstate').trigger ('change');
+    $ ('#jiuseraddress-percity').change (function () {
+        var c_value = $ ('#jiuseraddress-percity').val ();
+        if (c_value == 800000) {
+            $ ('#op_city').show ();
+        } else {
+            // $('#jiuseraddress-otherpercity').val('');
+            $ ('#op_city').hide ();
+            var cc_value = $ ('#jiuseraddress-percountry').val ();
+            if (cc_value == 2000) {
+                $ ('#op_country').show ();
+            } else {
+                $ ('#op_country').hide ();
+            }
+            var cs_value = $ ('#jiuseraddress-perstate').val ();
+            if (cs_value == 40000) {
+                $ ('#op_state').show ();
+            } else {
+                $ ('#op_state').hide ();
+            }
+        }
+    });
+    $ ('#jiuseraddress-percity').trigger ('change');
+    $ ('#jiuseraddress-perdistrict').change (function () {
+        var c_value = $ ('#jiuseraddress-perdistrict').val ();
+        if (c_value == 600000) {
+            $ ('#op_district').show ();
+        } else {
+            // $('#jiuseraddress-otherpercity').val('');
+            $ ('#op_city').hide ();
+            var cc_value = $ ('#jiuseraddress-percountry').val ();
+            if (cc_value == 2000) {
+                $ ('#op_country').show ();
+            } else {
+                $ ('#op_country').hide ();
+            }
+            var cs_value = $ ('#jiuseraddress-perstate').val ();
+            if (cs_value == 40000) {
+                $ ('#op_state').show ();
+            } else {
+                $ ('#op_state').hide ();
+            }
+        }
+    });
+    $ ('#jiuseraddress-perdistrict').trigger ('change');
+    $ ('#jiuseraddress-perpin').change (function () {
+        var c_value = $ ('#jiuseraddress-percountry').val ();
+        if (c_value == 101) {
+            var pincode = $ ('#jiuseraddress-perpin').val ();
+            if (!isNaN (pincode)) {
+                document.getElementById ("oppincode").innerHTML = "";
+            } else {
+                document.getElementById ("oppincode").innerHTML = "You have selected country as India, so enter the correct pincode.";
+            }
+        }
+    });
+// End of the Permanent Address Selection
+
+
+    $ ('#pobo_country').hide ();
+    $ ('#pobo_city').hide ();
+    $ ('#pobo_state').hide ();
+    $ ('#jiuserpersonal-placeofbirthcountry').change (function () {
+        var c_value = $ ('#jiuserpersonal-placeofbirthcountry').val ();
+        if (c_value == 2000) {
+            $ ('#pobo_country').show ();
+            $ ('#pobo_city').show ();
+            $ ('#pobo_state').show ();
+        } else {
+            $ ('#pobo_country').hide ();
+            $ ('#pobo_city').hide ();
+            $ ('#pobo_state').hide ();
+        }
+    });
+    $ ('#jiuserpersonal-placeofbirthcountry').trigger ('change');
+    $ ('#jiuserpersonal-placeofbirthstate').change (function () {
+        var c_value = $ ('#jiuserpersonal-placeofbirthstate').val ();
+        if (c_value == 40000) {
+            $ ('#pobo_state').show ();
+        } else {
+            // $('#jiuseraddress-otherstate').val('');
+            var sc_value = $ ('#jiuserpersonal-placeofbirthcountry').val ();
+            if (sc_value == 2000) {
+                $ ('#pobo_country').show ();
+            } else {
+                $ ('#pobo_country').hide ();
+            }
+            // $('#jiuseraddress-city').val('');
+            var scity_value = $ ('#jiuserpersonal-placeofbirthdistrict').val ();
+            if (scity_value == 800000) {
+                $ ('#pobo_city').show ();
+            } else {
+                $ ('#pobo_city').hide ();
+            }
+        }
+    });
+    $ ('#jiuserpersonal-placeofbirthstate').trigger ('change');
+    $ ('#jiuserpersonal-placeofbirthdistrict').change (function () {
+        var c_value = $ ('#jiuserpersonal-placeofbirthdistrict').val ();
+        if (c_value == 800000) {
+            $ ('#pobo_city').show ();
+        } else {
+            // $('#jiuseraddress-othercity').val('');
+            $ ('#pobo_city').hide ();
+            var cc_value = $ ('#jiuserpersonal-placeofbirthcountry').val ();
+            if (cc_value == 2000) {
+                $ ('#pobo_country').show ();
+            } else {
+                $ ('#pobo_country').hide ();
+            }
+            var cs_value = $ ('#jiuserpersonal-placeofbirthstate').val ();
+            if (cs_value == 40000) {
+                $ ('#pobo_state').show ();
+            } else {
+                $ ('#pobo_state').hide ();
+            }
+        }
+    });
+    $ ('#jiuserpersonal-placeofbirthdistrict').trigger ('change');
+
+
+    $ ('#jiuserpersonal-existing_student').on ('change', function () {
+        var selectedValue = $ (this).val ();
+        if (selectedValue != 0) {
+            $ ('#studentId').show ();
+        } else {
+            $ ('#studentId').hide ();
+            $ ('#jiuserpersonal-existing_studentid').val ('');
+            $ ("#jiuserpersonal-ou_id").val ('').trigger ('change');
+            $ ('#jiuserpersonal-programme_id').val ('').trigger ('change');
+            $ ('#jiuserpersonal-year_of_registration').val ('');
+        }
+    });
+    $ ('#jiuserpersonal-existing_student').trigger ('change');
+
+
+    $ ('#jiuserpersonal-pwdcategory').on ('change', function () {
+        var selectedValue = $ (this).val ();
+        if (selectedValue != 0) {
+            $ ('#pwdWar').show ();
+            $ ('#pwdpercent').show ();
+        } else {
+            $ ('#pwdWar').hide ();
+            $ ('#pwdpercent').hide ();
+        }
+        if (selectedValue == 30) {
+            $ ('#pwdother').show ();
+        } else {
+            $ ('#pwdother').hide ();
+        }
+    });
+    $ ('#jiuserpersonal-pwdcategory').trigger ('change');
+
+    $ ('#universityspecific-nssquota').on ('change', function () {
+        var selectedValue = $ (this).val ();
+        if (selectedValue != 0) {
+            $ ('#nss').show ();
+        } else {
+            $ ('#nss').hide ();
+            $ ('#universityspecific-nss_hours').val ('')
+        }
+    });
+    $ ('#universityspecific-nssquota').trigger ('change');
+
+    $ ('#universityspecific-sportsquota').on ('change', function () {
+        var selectedsValue = $ (this).val ();
+        if (selectedsValue != 0) {
+            $ ('#sports').show ();
+        } else {
+            $ ('#sports').hide ();
+            $ ('#universityspecific-sports_name').val ('')
+        }
+    });
+    $ ('#universityspecific-sportsquota').trigger ('change');
+
+});
+
+function verifyCheckBoxes(list, url) {
+    var selected = [];
+    $ ('#checkboxes input:checked').each (function () {
+        selected.push ($ (this).attr ('value'));
+    });
+    var unselected = [];
+    for (var i = 0; i < list.length; i++) {
+        var a = String (list[i]);
+        if ((selected.indexOf (a) == -1)) {
+            unselected.push (list[i]);
+        } else {
+        }
+    }
+    if (unselected.length > 0) {
+        $ ('#markbox').css ({'background-color': '#F4D3E5'});
+        $ ('#markbox2').text ('Select all the checkboxes');
+    } else {
+        $ ('#markbox').css ({'background-color': '#8BF4BA'});
+        window.location = url;
+    }
+}
+
+function arts(source) {
+    checkboxes = document.getElementsByName ('arts[]');
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function commerce(source) {
+    checkboxes = document.getElementsByName ('commerce[]');
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function science(source) {
+    checkboxes = document.getElementsByName ('science[]');
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function ncweb(source) {
+    checkboxes = document.getElementsByName ('ncweb[]');
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function diploma(source) {
+    checkboxes = document.getElementsByName ('diploma[]');
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+
+function bvoc(source) {
+    checkboxes = document.getElementsByName ('bvoc[]');
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
